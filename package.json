@@ -1,7 +1,7 @@
 {
 	"name": "get-exif",
 	"version": "0.0.0",
-	"description": "Get Exif data from a `Buffer` of JPEG or TIFF",
+	"description": "Get Exif data from JPEG or TIFF data",
 	"repository": "shinnn/get-exif",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
 	"scripts": {
@@ -29,7 +29,8 @@
 		"inspect-with-kind": "^1.0.4",
 		"is-jpg": "^1.0.1",
 		"is-tif": "^1.0.1",
-		"piexifjs": "^1.0.4"
+		"piexifjs": "^1.0.4",
+		"safe-buffer": "^5.1.2"
 	},
 	"devDependencies": {
 		"@shinnn/eslint-config-node": "^5.0.0",

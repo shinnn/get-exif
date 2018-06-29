@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.com/shinnn/get-exif.svg?branch=master)](https://travis-ci.com/shinnn/get-exif)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/get-exif.svg)](https://coveralls.io/github/shinnn/get-exif)
 
-A [Node.js](https://nodejs.org/) module to get Exif data from a `Buffer` of JPEG or TIFF
+A [Node.js](https://nodejs.org/) module to get Exif data from JPEG or TIFF data
 
 ```javascript
 const {readFile} = require('fs').promises;
@@ -35,14 +35,16 @@ npm install get-exif
 const getExif = require('get-exif');
 ```
 
-### getExif(*buffer*)
+### getExif(*data*)
 
-*buffer*: `Buffer` (data of a [JPEG](https://jpeg.org/jpeg/) file or a [TIFF](https://web.archive.org/web/20160306201233/http://partners.adobe.com/public/developer/tiff/index.html) file)  
+*data*: `Buffer` or `string` (data of a [JPEG](https://jpeg.org/jpeg/) file or a [TIFF](https://web.archive.org/web/20160306201233/http://partners.adobe.com/public/developer/tiff/index.html) file)  
 Return: `Object`
 
 It reads Exif data from a `Buffer` using [Piexifjs](https://github.com/hMatoba/piexifjs) and return it as an `Object`.
 
 ```javascript
+imageBuffer; //=> <Buffer ff d8 ff e1 94 41 45 78 69 66 00 00 49 49 2a ...>
+
 getExif(imageBuffer); /*=> {
   '0th': { ... },
   '1st': { ... },
@@ -51,6 +53,14 @@ getExif(imageBuffer); /*=> {
   Interop: { ... },
   thumbnail: ' ... '
 } */
+```
+
+It also accepts a [`Buffer`-to-`latin1` encoded string](https://nodejs.org/api/buffer.html#buffer_buf_tostring_encoding_start_end).
+
+```javascript
+imageString; //=> 'ÿØÿáAExif\u0000\u0000II*\u0000\b\u0000 ...'
+
+getExif(imageString);
 ```
 
 ## License

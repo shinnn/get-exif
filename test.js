@@ -5,48 +5,52 @@ const getExif = require('.');
 const smallestJpeg = require('smallest-jpeg');
 const test = require('tape');
 
-const fixture = Buffer.from(insert(dump({
+const fixture = insert(dump({
 	Exif: {
 		[ExifIFD.Sharpness]: 777
 	}
-}), smallestJpeg().toString('binary')), 'binary');
+}), smallestJpeg().toString('binary'));
 
 test('getExif()', async t => {
-	const result = getExif(fixture);
-
 	t.deepEqual(
-		Object.keys(result),
+		Object.keys(getExif(Buffer.from(fixture, 'binary'))),
 		['0th', 'Exif', 'GPS', 'Interop', '1st', 'thumbnail'],
-		'should return an object.'
+		'should parse Exif data.'
 	);
 
 	t.equal(
-		result.Exif[ExifIFD.Sharpness],
+		getExif(fixture).Exif[ExifIFD.Sharpness],
 		777,
-		'should parse Exif data.'
+		'should support Buffer-to-latin1 encoded string.'
 	);
 
 	t.throws(
 		() => getExif(true),
-		/^TypeError.*Expected a buffer of JPEG of TIFF, but got a non-Buffer value true\./,
+		/^TypeError.*Expected a Buffer of JPEG\/TIFF, or a Buffer-to-latin1 encoded string of it, but got true\./,
 		'should throw an error when it takes a non-Buffer value.'
 	);
 
 	t.throws(
 		() => getExif(Buffer.alloc(0)),
-		/^RangeError.*got an empty buffer\. JPEG must be 107 bytes or more, and TIFF must be 46 bytes or more\./,
+		/^RangeError.*got an empty Buffer\. JPEG must be 107 bytes or more, and TIFF must be 46 bytes or more\./,
 		'should throw an error when it takes an empty Buffer.'
 	);
 
 	t.throws(
+		() => getExif(''),
+		/^RangeError.*got '' \(empty string\)\. JPEG must be 107 bytes or more, and TIFF must be 46 bytes or more\./,
+		'should throw an error when it takes an empty string.'
+	);
+
+	t.throws(
 		() => getExif(Buffer.alloc(45)),
-		/^RangeError.*Expected a buffer of JPEG of TIFF, but got a buffer with insufficient data size 45\. /,
+		/^RangeError.*, but got insufficient data size 45\. /,
 		'should throw an error when it takes a too small Buffer.'
 	);
 
 	t.throws(
 		() => getExif(Buffer.alloc(46)),
-		/^RangeError.*Expected a buffer of JPEG of TIFF, but got a buffer of neither\./,
+		/^RangeError.*, but got a Buffer of neither\./,
 		'should throw an error when it takes a non-image Buffer.'
 	);
 
