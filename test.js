@@ -9,7 +9,7 @@ const fixture = insert(dump({
 	Exif: {
 		[ExifIFD.Sharpness]: 777
 	}
-}), smallestJpeg().toString('binary'));
+}), smallestJpeg.toString('binary'));
 
 test('getExif()', async t => {
 	t.deepEqual(
