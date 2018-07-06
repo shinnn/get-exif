@@ -1,7 +1,7 @@
 {
 	"name": "get-exif",
 	"version": "0.2.0",
-	"description": "Get Exif data from JPEG or TIFF data",
+	"description": "Get Exif data from JPEG data",
 	"repository": "shinnn/get-exif",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
 	"scripts": {
@@ -21,13 +21,10 @@
 		"buffer",
 		"jpg",
 		"jpeg",
-		"tif",
-		"tiff",
 		"image"
 	],
 	"dependencies": {
 		"is-jpg": "^2.0.0",
-		"is-tif": "^1.0.1",
 		"piexifjs": "^1.0.4",
 		"safe-buffer": "^5.1.2"
 	},

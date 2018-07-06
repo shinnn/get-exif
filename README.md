@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.com/shinnn/get-exif.svg?branch=master)](https://travis-ci.com/shinnn/get-exif)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/get-exif.svg)](https://coveralls.io/github/shinnn/get-exif)
 
-A [Node.js](https://nodejs.org/) module to get Exif data from JPEG or TIFF data
+A [Node.js](https://nodejs.org/) module to get Exif data from JPEG data
 
 ```javascript
 const {readFile} = require('fs').promises;
@@ -37,7 +37,7 @@ const getExif = require('get-exif');
 
 ### getExif(*data*)
 
-*data*: `Buffer` or `string` (data of a [JPEG](https://jpeg.org/jpeg/) file or a [TIFF](https://web.archive.org/web/20160306201233/http://partners.adobe.com/public/developer/tiff/index.html) file)  
+*data*: `Buffer` or `string` (data of a [JPEG](https://jpeg.org/jpeg/) file)  
 Return: `Object`
 
 It reads Exif data from a `Buffer` using [Piexifjs](https://github.com/hMatoba/piexifjs) and return it as an `Object`.
