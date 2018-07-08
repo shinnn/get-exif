@@ -4,7 +4,6 @@ const inspect = require('util').inspect;
 
 const load = require('piexifjs').load;
 const isJpg = require('is-jpg');
-const SafeBuffer = require('safe-buffer').Buffer;
 
 const ERROR = 'Expected a Buffer of JPEG or a Buffer-to-latin1 encoded string of it';
 const SIZE_ERROR = 'JPEG must be 107 bytes or more.';
@@ -17,7 +16,7 @@ module.exports = function getExif(arg) {
 			throw new RangeError(`${ERROR}, but got '' (empty string). ${SIZE_ERROR}`);
 		}
 
-		buf = SafeBuffer.from(buf, 'binary');
+		buf = Buffer.from(buf, 'binary');
 	} else {
 		arg = arg.toString('binary');
 	}

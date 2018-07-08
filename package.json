@@ -25,8 +25,7 @@
 	],
 	"dependencies": {
 		"is-jpg": "^2.0.0",
-		"piexifjs": "^1.0.4",
-		"safe-buffer": "^5.1.2"
+		"piexifjs": "^1.0.4"
 	},
 	"devDependencies": {
 		"@shinnn/eslint-config-node": "^6.0.0",
