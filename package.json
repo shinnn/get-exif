@@ -24,6 +24,7 @@
 		"image"
 	],
 	"dependencies": {
+		"inspect-with-kind": "^1.0.4",
 		"is-jpg": "^2.0.0",
 		"piexifjs": "^1.0.4"
 	},

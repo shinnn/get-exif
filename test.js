@@ -25,8 +25,8 @@ test('getExif()', async t => {
 	);
 
 	t.throws(
-		() => getExif(true),
-		/^TypeError.*Expected a Buffer of JPEG or a Buffer-to-latin1 encoded string of it, but got true\./,
+		() => getExif([-0]),
+		/^TypeError.*Expected a Buffer of JPEG or a Buffer-to-latin1 encoded string of it, but got \[ -0 ] \(array\)\./,
 		'should throw an error when it takes a non-Buffer value.'
 	);
 
@@ -50,7 +50,19 @@ test('getExif()', async t => {
 
 	t.throws(
 		() => getExif(Buffer.alloc(107)),
-		/^RangeError.*, but got a Buffer of neither\./,
+		/^RangeError.*, but got non-JPEG data\./,
+		'should throw an error when it takes a non-image Buffer.'
+	);
+
+	t.throws(
+		() => getExif(),
+		/^RangeError.*, Expected 1 argument \(<Buffer|string>\), but got no arguments\./,
+		'should throw an error when it takes a non-image Buffer.'
+	);
+
+	t.throws(
+		() => getExif('', ''),
+		/^RangeError.*, Expected 1 argument \(<Buffer|string>\), but got 2 arguments\./,
 		'should throw an error when it takes a non-image Buffer.'
 	);
 
