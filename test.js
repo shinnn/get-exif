@@ -57,13 +57,13 @@ test('getExif()', async t => {
 	t.throws(
 		() => getExif(),
 		/^RangeError.*, Expected 1 argument \(<Buffer|string>\), but got no arguments\./,
-		'should throw an error when it takes a non-image Buffer.'
+		'should throw an error when it takes a no arguments.'
 	);
 
 	t.throws(
 		() => getExif('', ''),
 		/^RangeError.*, Expected 1 argument \(<Buffer|string>\), but got 2 arguments\./,
-		'should throw an error when it takes a non-image Buffer.'
+		'should throw an error when it takes too many arguments.'
 	);
 
 	t.end();

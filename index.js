@@ -23,24 +23,41 @@ module.exports = function getExif(...args) {
 		buf = arg;
 
 		if (buf.length === 0) {
-			throw new RangeError(`${ERROR}, but got an empty Buffer. ${SIZE_ERROR}`);
+			const error = new RangeError(`${ERROR}, but got an empty Buffer. ${SIZE_ERROR}`);
+			error.code = 'ERR_EMPTY_DATA';
+
+			throw error;
 		}
 	} else if (typeof arg === 'string') {
 		buf = Buffer.from(arg, 'binary');
 
 		if (buf.length === 0) {
-			throw new RangeError(`${ERROR}, but got '' (empty string). ${SIZE_ERROR}`);
+			const error = new RangeError(`${ERROR}, but got '' (empty string). ${SIZE_ERROR}`);
+			error.code = 'ERR_EMPTY_DATA';
+
+			throw error;
 		}
 	} else {
-		throw new TypeError(`${ERROR}, but got ${inspectWithKind(arg)}.`);
+		const error = new TypeError(`${ERROR}, but got ${inspectWithKind(arg)}.`);
+		error.code = 'ERR_INVALID_ARG_TYPE';
+
+		throw error;
 	}
 
 	if (buf.length < 107) {
-		throw new RangeError(`${ERROR}, but got insufficient data size ${Buffer.byteLength(arg, 'binary')}. ${SIZE_ERROR}`);
+		const error = new RangeError(`${ERROR}, but got insufficient data size ${Buffer.byteLength(arg, 'binary')}. ${SIZE_ERROR}`);
+		error.code = 'ERR_INSUFFICIENT_DATA_SIZE';
+		error.passedSize = buf.length;
+		error.requiredSize = 107;
+
+		throw error;
 	}
 
 	if (!isJpg(buf)) {
-		throw new RangeError(`${ERROR}, but got non-JPEG data.`);
+		const error = new RangeError(`${ERROR}, but got non-JPEG data.`);
+		error.code = 'ERR_DATA_NOT_SUPPORTED';
+
+		throw error;
 	}
 
 	return load(arg.toString('binary'));
