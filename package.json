@@ -2,8 +2,8 @@
 	"name": "get-exif",
 	"version": "1.0.1",
 	"description": "Get Exif data from JPEG data",
-	"repository": "shinnn/get-exif",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+	"repository": "shinnn/get-exif",
 	"license": "ISC",
 	"scripts": {
 		"pretest": "eslint .",
@@ -25,7 +25,6 @@
 	],
 	"dependencies": {
 		"inspect-with-kind": "^1.0.5",
-		"is-jpg": "^2.0.0",
 		"piexifjs": "^2.0.0-beta.7"
 	},
 	"devDependencies": {
@@ -38,5 +37,8 @@
 	},
 	"eslintConfig": {
 		"extends": "@shinnn"
+	},
+	"nyc": {
+		"extends": "nyc-config-common"
 	}
 }

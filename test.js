@@ -13,7 +13,7 @@ const fixture = insert(dump({
 
 test('getExif()', async t => {
 	t.deepEqual(
-		Object.keys(getExif(Buffer.from(fixture, 'binary'))),
+		Object.keys(getExif(Buffer.from(fixture, 'latin1'))),
 		['0th', 'Exif'],
 		'should parse Exif data.'
 	);
@@ -50,8 +50,14 @@ test('getExif()', async t => {
 
 	t.throws(
 		() => getExif(Buffer.alloc(107)),
-		/^RangeError.*, but got non-JPEG data\./u,
-		'should throw an error when it takes a non-image Buffer.'
+		/^RangeError.* got non-JPEG data <Buffer 00 00 00 \.\.\. 104 more bytes>\. /u,
+		'should throw an error when it takes a non-JPEG Buffer.'
+	);
+
+	t.throws(
+		() => getExif('a'.repeat(107)),
+		/^RangeError.* got non-JPEG string 'aaa \.\.\.'\. Byte sequence of JPEG must starts with FF D8 FF\./u,
+		'should throw an error when it takes a non-JPEG string.'
 	);
 
 	t.throws(
