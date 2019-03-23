@@ -37,7 +37,7 @@ const getExif = require('get-exif');
 
 ### getExif(*data*)
 
-*data*: `Buffer` or `string` (data of a [JPEG](https://jpeg.org/jpeg/) file)  
+*data*: `Buffer | string` (data of a [JPEG](https://jpeg.org/jpeg/) file)  
 Return: `Object`
 
 It reads Exif data from a `Buffer` using [Piexifjs](https://github.com/hMatoba/piexifjs) and return it as an `Object`.
@@ -62,6 +62,10 @@ imageString; //=> 'ÿØÿáAExif\u0000\u0000II*\u0000\b\u0000 ...'
 
 getExif(imageString);
 ```
+
+## Related
+
+* [read-exif](https://github.com/shinnn/read-exif) — Get Exif data from a file instead of a `Buffer` or `string`
 
 ## License
 
