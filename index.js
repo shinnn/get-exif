@@ -3,7 +3,7 @@
 const buffer = require('buffer');
 const {inspect} = require('util');
 
-const {load} = require('piexifjs');
+const {constants: {Types: {Ascii, Rational, SRational}}, load, Tags: {Exif}, TagValues: {ExifIFD}} = require('piexifjs');
 const inspectWithKind = require('inspect-with-kind');
 
 const MINIMUM_JPEG_SIZE = 107;
@@ -11,6 +11,50 @@ const MINIMUM_JPEG_SIZE = 107;
 const JPEG_SIGNATURE = Buffer.from([0xff, 0xd8, 0xff]);
 const JPEG_SIGNATURE_STRING = JPEG_SIGNATURE.toString('latin1');
 const ERROR = 'Expected a Buffer of JPEG or a Buffer-to-latin1 encoded string of it';
+// http://www.cipa.jp/std/documents/e/DC-008-Translation-2016-E.pdf
+const EXIF_231_TAGS = {
+	'36880': {
+		name: 'OffsetTime',
+		type: Ascii
+	},
+	'36881': {
+		name: 'OffsetTimeOriginal',
+		type: Ascii
+	},
+	'36882': {
+		name: 'OffsetTimeDigitized',
+		type: Ascii
+	},
+	'37888': {
+		name: 'Temperature',
+		type: SRational
+	},
+	'37889': {
+		name: 'Humidity',
+		type: Rational
+	},
+	'37890': {
+		name: 'Pressure',
+		type: Rational
+	},
+	'37891': {
+		name: 'WaterDepth',
+		type: SRational
+	},
+	'37892': {
+		name: 'Acceleration',
+		type: Rational
+	},
+	'37893': {
+		name: 'CameraElevationAngle',
+		type: SRational
+	}
+};
+
+for (const [key, value] of Object.entries(EXIF_231_TAGS)) {
+	Exif[key] = value;
+	ExifIFD[value.name] = parseInt(key, 10);
+}
 
 function createInsufficientDataSizeError(message, size) {
 	const error = new RangeError(`${ERROR}, but ${message} JPEG must be ${MINIMUM_JPEG_SIZE} bytes or more.`);

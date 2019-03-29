@@ -1,13 +1,16 @@
 'use strict';
 
-const {dump, TagValues: {ExifIFD}, insert} = require('piexifjs');
+const {dump, insert} = require('piexifjs');
 const getExif = require('.');
 const smallestJpeg = require('smallest-jpeg');
 const test = require('tape');
 
+const SHARPNESS = '41994';
+const OFFSET_TIME = '36880';
 const fixture = insert(dump({
 	Exif: {
-		[ExifIFD.Sharpness]: 777
+		[SHARPNESS]: 777,
+		[OFFSET_TIME]: '+09:00'
 	}
 }), smallestJpeg.toString('binary'));
 
@@ -18,10 +21,18 @@ test('getExif()', async t => {
 		'should parse Exif data.'
 	);
 
+	const exif = getExif(fixture).Exif;
+
 	t.equal(
-		getExif(fixture).Exif[ExifIFD.Sharpness],
+		exif[SHARPNESS],
 		777,
 		'should support Buffer-to-latin1 encoded string.'
+	);
+
+	t.equal(
+		exif[OFFSET_TIME],
+		'+09:00',
+		'should support tags introduced in Exif version 2.31.'
 	);
 
 	t.throws(

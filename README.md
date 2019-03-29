@@ -13,10 +13,10 @@ const getExif = require('exif');
 (async () => {
   const exif = getExif(await readFile('example.jpg')).Exif;
 
-  // 33434: tag ID of `ExposureTime` tag
+  // 33434: ID of the `ExposureTime` tag
   exif['33434']; //=> [1, 100]
 
-  // 36867: tag ID of `DateTimeOriginal` tag
+  // 36867: ID of the `DateTimeOriginal` tag
   exif['36867']; //=> '2017:11:19 08:47:19'
 })();
 ```
