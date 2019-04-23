@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/get-exif.svg)](https://www.npmjs.com/package/get-exif)
 [![Build Status](https://travis-ci.com/shinnn/get-exif.svg?branch=master)](https://travis-ci.com/shinnn/get-exif)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/get-exif.svg)](https://coveralls.io/github/shinnn/get-exif)
+[![codecov](https://codecov.io/gh/shinnn/get-exif/branch/master/graph/badge.svg)](https://codecov.io/gh/shinnn/get-exif)
 
 A [Node.js](https://nodejs.org/) module to get Exif data from JPEG data
 
