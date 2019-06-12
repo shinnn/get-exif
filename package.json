@@ -2,7 +2,7 @@
 	"name": "get-exif",
 	"version": "1.0.3",
 	"description": "Get Exif data from JPEG data",
-	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+	"author": "Watanabe Shinnosuke (https://github.com/shinnn)",
 	"repository": "shinnn/get-exif",
 	"license": "ISC",
 	"scripts": {

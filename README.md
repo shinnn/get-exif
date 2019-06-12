@@ -1,7 +1,7 @@
 # get-exif
 
 [![npm version](https://img.shields.io/npm/v/get-exif.svg)](https://www.npmjs.com/package/get-exif)
-[![Build Status](https://travis-ci.com/shinnn/get-exif.svg?branch=master)](https://travis-ci.com/shinnn/get-exif)
+[![Github Actions](https://action-badges.now.sh/shinnn/get-exif)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/shinnn/get-exif)
 [![codecov](https://codecov.io/gh/shinnn/get-exif/branch/master/graph/badge.svg)](https://codecov.io/gh/shinnn/get-exif)
 
 A [Node.js](https://nodejs.org/) module to get Exif data from JPEG data
@@ -69,4 +69,4 @@ getExif(imageString);
 
 ## License
 
-[ISC License](./LICENSE) © 2018 - 2019 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2018 - 2019 Watanabe Shinnosuke
